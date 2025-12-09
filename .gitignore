@@ -1,0 +1,25 @@
+# Sensitive
+.env
+*.key
+*.pem
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.nexus/
+venv/
+
+# Data
+*.sqlite3
+chroma_db/
+ragflow_data/
+
+# Backups
+backup_*/
+*.backup
+
+# OS
+.DS_Store
+Thumbs.db

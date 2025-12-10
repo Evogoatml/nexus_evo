@@ -338,24 +338,3 @@ def cleanup_telegram_loop():
 import atexit
 atexit.register(cleanup_telegram_loop)
 
-@bot.message_handler(commands=['recommend'])
-def recommend_algorithm_command(message):
-    """Use Kestra AI orchestration to recommend algorithm"""
-    task = message.text.replace('/recommend', '').strip()
-    
-    if not task:
-        bot.reply_to(message, "Usage: /recommend <task>\nExample: /recommend secure file encryption")
-        return
-    
-    bot.reply_to(message, f"🔄 Analyzing algorithms with Kestra AI...\nTask: {task}")
-    
-    from agents.kestra_agent import kestra_orchestrator
-    result = kestra_orchestrator.algorithm_selector_workflow(task)
-    
-    # Format response
-    response = f"✅ Kestra Analysis Complete\n\n"
-    response += f"📊 Scanned: {result['steps'][0]['found']} algorithms\n\n"
-    response += f"📝 Summary:\n{result['steps'][1]['summary'][:300]}...\n\n"
-    response += f"💡 Recommendation:\n{result['steps'][2]['recommendation']}"
-    
-    bot.reply_to(message, response)
